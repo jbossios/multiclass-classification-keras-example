@@ -1,16 +1,13 @@
 # Example of a multiclass classifier with Keras
 
 ## Dependencies
-
+```
 numpy
-
 pandas
-
 matplotlib
-
 keras from tensorflow
-
 sklearn
+```
 
 ## Run
 
