@@ -13,13 +13,13 @@ sklearn
 
 In ```multiclass_classifier_keras.py```, you can find an example on how to train a multiclass classifier using Keras.
 
-This example uses fake data generate randomly. A given number of clusters of people is created, each clusters have a different label, and we can learn that label based on the income and age of the people in a given cluster. We can choose the number of classes/clusters with the ```-k``` flag (if not provided, 3 clusters will be generated).
+This example uses fake data generated randomly. A given number of clusters of people is created, each cluster have a different label, and we can learn that label based on the income and age of the people in a given cluster. We can choose the number of classes/clusters with the ```-k``` flag (if not provided, 3 clusters will be generated).
 
-The first time, we need to train a model which we can do by running the following:
+For generating the data, training the model and evaluating the peformance in testing data, run the following:
 
 
 ```
-python3 multiclass_classifier_keras.py
+python multiclass_classifier_keras.py
 ```
 
 This will save the best trained model to ```best_model.h5``` and will create four PDFs:
