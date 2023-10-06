@@ -36,8 +36,8 @@ def create_data(
     labels = []  # collect class labels
     
     # Randomly define a centroid for each class
-    age_centers = {i: uniform(25, 100) for i in range(k)}
-    income_centers = {i: uniform(0, 1000000) for i in range(k)}
+    x_centers = {i: uniform(30, 70) for i in range(k)}
+    y_centers = {i: uniform(0, 400000) for i in range(k)}
     
     # Generate npoints
     for ipoint in range(npoints):
@@ -46,20 +46,20 @@ def create_data(
         labels.append(ik)
         
         # Retrieve centroid for this class
-        center_age = age_centers[ik]
-        center_income = income_centers[ik]
+        center_x = x_centers[ik]
+        center_y = y_centers[ik]
         
         # Generate point
         X.append([
-            normal(center_age, 3),
-            normal(center_income, 15000)
+            normal(center_x, 3),
+            normal(center_y, 15000)
         ])
 
     return np.array(X), np.array(labels)
 
 
 def make_scatter_plot(
-        data: np.array,  # 2D array (age, income)
+        data: np.array,  # 2D array
         labels: np.array,  # 1D array with class labels
         k: int,  # number of classes
         outname: str  # output name
@@ -89,14 +89,12 @@ def make_scatter_plot(
         # Get data for class ik      
         data_k = data[labels == ik]
 
-        # Unpack data (age and income)
+        # Unpack data
         X = list(zip(*data_k))
         x, y = X[0], X[1]
 
         # Make scatter plot and add x- and y-axis titles
         plt.scatter(x, y, c = colors[ik])
-        plt.xlabel('Age')
-        plt.ylabel('Income')
 
     # Save figure
     plt.savefig(outname)
@@ -246,6 +244,7 @@ def create_and_compile_model(
 
 def plot_confusion_matrix(cm):
     ax = sns.heatmap(cm, annot=True)
+    ax.set_title('x-axis: true labels, y-axis: predicted labels')
     ax.get_figure().savefig('confusion_matrix.png')
 
 

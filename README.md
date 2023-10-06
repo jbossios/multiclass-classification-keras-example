@@ -1,31 +1,39 @@
-# Example of a multiclass classifier with Keras
+# Multiclass classifier with deep neural networks using the Keras API from TensorFlow
 
 ## Dependencies
 ```
 numpy
 pandas
 matplotlib
+seaborn
 keras from tensorflow
 sklearn
 ```
 
+## Introduction
+
+In ```multiclass_classifier_keras.py```, you can find an example on how to implement and train a multiclass classifier based on deep neural networks with Keras.
+
+This example uses fake data, generated randomly. This data is characterized by two features and is classified into ```k``` labels. In this example, we will learn those labels.
+
 ## Run
 
-In ```multiclass_classifier_keras.py```, you can find an example on how to train a multiclass classifier using Keras.
-
-This example uses fake data generated randomly. A given number of clusters of people is created, each cluster have a different label, and we can learn that label based on the income and age of the people in a given cluster. We can choose the number of classes/clusters with the ```-k``` flag (if not provided, 3 clusters will be generated).
-
-For generating the data, training the model and evaluating the peformance in testing data, run the following:
+For generating the data, training the model and evaluating the performance in testing data, run the following:
 
 
 ```
 python multiclass_classifier_keras.py
 ```
 
-This will save the best trained model to ```best_model.h5``` and will create five PNG images:
+Note:
+- You can choose the number of classes with the ```-k``` flag (if not provided, 3 classes will be used)
 
-- ```data.png```: this is a scatter plot with the generated data
-- ```data_normalized.png```:  this is the same as ```data.png``` but here the data was normalized
-- ```data_predicted.png```: the same normalized data is plotted but the colors are based on the predicted labels (if the DNN works well it should look very similar to ```data_normalized.png```)
-- ```loss.png```: this will have the loss and val_loss vs epoch
-- ```compare_distribution_of_classes_data.png```: this compares the distribution of classes for each data set type (training, test, validation)
+The above script will save the best trained model to ```best_model.h5``` and will create five PNG images:
+
+- ```data.png```: this is a scatter plot with the generated data, colored by the corresponding label
+- ```standardized_training_data.png```:  this shows the data that will be used for training, which was already standardized
+- ```test_data.png```:  this one shows the data that is used for testing
+- ```test_data_predicted_labels.png```: the same test data is showed but data is colored based on the predicted labels (if the DNN works well it should look very similar to ```test_data.png```)
+- ```loss.png```: this will have the loss and validation loss (val_loss) vs epoch
+- ```compare_distribution_of_classes_data.png```: this compares the distribution of classes for each dataset type (training, test, validation, all=complete dataset)
+- ```confusion_matrix.png```: as the name suggests, this will have the confusion matrix using the test data
