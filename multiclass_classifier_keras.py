@@ -108,14 +108,17 @@ def standardize_data(data: tuple[np.array, np.array]) -> tuple[np.array, np.arra
 
 
 def create_model(
-        k: int  # number of classes
+        k: int,  # number of classes
+        dropout_rate: float = 0  # rate for dropout layers
     ) -> Sequential:
     """ Create Sequential model for multiclass classifier """
     model = Sequential()
     model.add(Dense(16, activation='relu', input_dim=2))
-    model.add(Dropout(0.5))
+    if dropout_rate != 0:
+        model.add(Dropout(dropout_rate))
     model.add(Dense(8, activation='relu'))
-    model.add(Dropout(0.5))
+    if dropout_rate != 0:
+        model.add(Dropout(dropout_rate))
     model.add(Dense(k, activation='softmax'))
     return model
 
