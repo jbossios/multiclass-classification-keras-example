@@ -37,3 +37,5 @@ The above script will save the best trained model to ```best_model.h5``` and wil
 - ```loss.png```: this will have the loss and validation loss (val_loss) vs epoch
 - ```compare_distribution_of_classes_data.png```: this compares the distribution of classes for each dataset type (training, test, validation, all=complete dataset)
 - ```confusion_matrix.png```: as the name suggests, this will have the confusion matrix using the test data
+
+If you like this example, please consider giving me a star!
