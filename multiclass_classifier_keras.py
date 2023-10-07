@@ -247,7 +247,7 @@ def create_and_compile_model(
 
 def plot_confusion_matrix(cm):
     ax = sns.heatmap(cm, annot=True)
-    ax.set_title('x-axis: true labels, y-axis: predicted labels')
+    ax.set_title('x-axis: predicted labels, y-axis: true labels')
     ax.get_figure().savefig('confusion_matrix.png')
 
 
