@@ -195,7 +195,7 @@ def compile(model: Sequential, optimizer: str = 'Adam') -> None:
     """ Compile model """
     opt = optimizers.Adam(learning_rate=0.001) if optimizer == 'Adam' else optimizers.SGD(learning_rate=0.1)
     model.compile(
-        loss = 'sparse_categorical_crossentropy',
+        loss = 'categorical_crossentropy',
         optimizer = opt,
         metrics = ['accuracy']
     )
@@ -251,6 +251,11 @@ def plot_confusion_matrix(cm):
     ax.get_figure().savefig('confusion_matrix.png')
 
 
+def to_numerical(labels):
+    """ Revert one-hot encoding """
+    return np.argmax(labels, axis=1)
+
+
 def main(
         k: int,  # number of classes
         train_model: bool  # train model or load previous trained model
@@ -264,6 +269,10 @@ def main(
     # Create fake data
     data, labels = create_data(k=k, npoints=100)
     make_scatter_plot(data=data, labels=labels, k=k, outname='data.png')
+
+    # Convert labels using one-hot encoding technique
+    labels = labels.reshape(-1, 1)
+    labels = keras.utils.to_categorical(y=labels, num_classes=k)
 
     # Separate data into training, validation and testing data
     #   30% is used for testing
@@ -286,7 +295,7 @@ def main(
     # Visualize standardized training dataset
     make_scatter_plot(
         data = standardized_data_dict['training'][0],
-        labels = standardized_data_dict['training'][1],
+        labels = to_numerical(standardized_data_dict['training'][1]),
         k = k,
         outname = 'standardized_training_data.png'
     )
@@ -298,10 +307,10 @@ def main(
     # Compare distribution of classes
     compare_distributions(
             {
-                'all': labels,
-                'training': y_train,
-                'testing': y_test,
-                'validation': y_val
+                'all': to_numerical(labels),
+                'training': to_numerical(y_train),
+                'testing': to_numerical(y_test),
+                'validation': to_numerical(y_val)
             },
             k
         ) 
@@ -333,7 +342,7 @@ def main(
     # Visualize test dataset with true labels
     make_scatter_plot(
         data = data_dict['testing'][0],  # data for testing
-        labels = data_dict['testing'][1],  # labels for testing
+        labels = to_numerical(data_dict['testing'][1]),  # labels for testing
         k = k,
         outname = 'test_data.png'
     )
@@ -347,7 +356,7 @@ def main(
     )
 
     # Calculate and plot confusion matrix
-    cm = confusion_matrix(data_dict['testing'][1], labels_predicted)
+    cm = confusion_matrix(to_numerical(data_dict['testing'][1]), labels_predicted)
     plot_confusion_matrix(cm)
 
     print('>>> ALL DONE <<<')
