@@ -276,10 +276,10 @@ def main(
 
     # Separate data into training, validation and testing data
     #   30% is used for testing
-    #   20% of the remaining data is used for validation
-    #   the rest is used for training
+    #   80% of the remaining data is used for training
+    #   the rest is used for validation
     x_train_tmp, X_test, y_train_tmp, y_test = train_test_split(data, labels, test_size=0.3, random_state=10)
-    X_train, X_val, y_train, y_val = train_test_split(x_train_tmp, y_train_tmp, test_size=0.2, random_state=10)
+    X_train, X_val, y_train, y_val = train_test_split(x_train_tmp, y_train_tmp, train_size=0.8, random_state=10)
 
     # Standardize all datasets
     data_dict = {
