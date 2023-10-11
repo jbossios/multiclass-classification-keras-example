@@ -12,7 +12,7 @@ sklearn
 
 ## Introduction
 
-In ```multiclass_classifier_keras.py```, you can find an example on how to implement and train a multiclass classifier based on deep neural networks with Keras.
+In ```multiclass_classifier_keras.py```, you can find an example on how to implement and train a multiclass classifier based on deep neural networks with Keras, and how to evaluate its performance.
 
 This example uses fake data, generated randomly. This data is characterized by two features and is classified into ```k``` labels. In this example, we will learn those labels.
 
@@ -28,7 +28,7 @@ python multiclass_classifier_keras.py
 Note:
 - You can choose the number of classes with the ```-k``` flag (if not provided, 3 classes will be used)
 
-The above script will save the best trained model to ```best_model.h5``` and will create five PNG images:
+The above script will save the best trained model to ```best_model.h5``` and will create seven PNG images:
 
 - ```data.png```: this is a scatter plot with the generated data, colored by the corresponding label
 - ```standardized_training_data.png```:  this shows the data that will be used for training, which was already standardized

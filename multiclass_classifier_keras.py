@@ -281,7 +281,7 @@ def main(
     x_train_tmp, X_test, y_train_tmp, y_test = train_test_split(data, labels, test_size=0.3, random_state=10)
     X_train, X_val, y_train, y_val = train_test_split(x_train_tmp, y_train_tmp, train_size=0.8, random_state=10)
 
-    # Standardize all datasets
+    # Standardize features in all datasets
     data_dict = {
         'training': (X_train, y_train),
         'testing': (X_test, y_test),
@@ -292,7 +292,7 @@ def main(
         data_standardized = standardize_data(data=data_tuple[0])
         standardized_data_dict[dataset_type] = (data_standardized, data_tuple[1])
 
-    # Visualize standardized training dataset
+    # Visualize standardized features in training dataset
     make_scatter_plot(
         data = standardized_data_dict['training'][0],
         labels = to_numerical(standardized_data_dict['training'][1]),
